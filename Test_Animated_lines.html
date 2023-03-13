@@ -1,0 +1,277 @@
+
+<html lang="en">
+<head>
+	<title>Labeled Geometry (Three.js)</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel=stylesheet href="css/base.css"/>
+</head>
+<body>
+
+<div id="message"></div>
+<script src="http://threejs.org/build/three.min.js"></script>
+<script src="http://threejs.org/examples/js/controls/OrbitControls.js"></script>
+<!-- <script src="js/Three.js"></script>
+<script src="js/Detector.js"></script>
+<script src="js/Stats.js"></script>
+<script src="js/OrbitControls.js"></script>
+<script src="js/THREEx.KeyboardState.js"></script>
+<script src="js/THREEx.FullScreen.js"></script>
+<script src="js/THREEx.WindowResize.js"></script> -->
+
+<!---- jQuery code to display an information button and box when clicked. -->
+<!-- <script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+<link rel=stylesheet href="css/jquery-ui.css" />
+<link rel=stylesheet href="css/info.css"/>
+<script src="js/info.js"></script>
+<div id="infoButton"></div>
+<div id="infoBox" title="Demo Information">
+This three.js demo is part of a collection at
+<a href="http://stemkoski.github.io/Three.js/">http://stemkoski.github.io/Three.js/</a>
+</div> --> -->
+<!-- ------------------------------------------------------------ -->
+
+<!-- <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div> -->
+<script>
+//SOLUTION : 1
+
+// Animate the drawing of a line using LineDashedMaterial hack
+
+var mesh, renderer, scene, camera, controls;
+
+var fraction = 0;
+var lineLength;
+
+init();
+animate();
+
+function init() {
+
+	// info
+	var info = document.createElement( 'div' );
+	info.style.position = 'absolute';
+	info.style.top = '30px';
+	info.style.width = '100%';
+	info.style.textAlign = 'center';
+	info.style.color = '#fff';
+	info.style.fontWeight = 'bold';
+	info.style.backgroundColor = 'transparent';
+	info.style.zIndex = '1';
+	info.style.fontFamily = 'Monospace';
+	info.innerHTML = 'Drag mouse to rotate camera; scroll to zoom';
+	document.body.appendChild( info );
+	
+	// renderer
+	renderer = new THREE.WebGLRenderer();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	// scene
+	scene = new THREE.Scene();
+
+	// camera
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+	camera.position.set( 20, 20, 20 );
+
+	// controls
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.minDistance = 10;
+	controls.maxDistance = 100;
+
+	// points
+	var points = ( new THREE.BoxGeometry( 10, 10, 10, 4, 4, 4 ) ).vertices;
+
+	// geometry
+	var geometry = new THREE.BufferGeometry();
+
+	// attributes
+	numPoints = points.length;
+	var positions = new Float32Array( numPoints * 3 ); // 3 vertices per point
+	var colors = new Float32Array( numPoints * 3 ); // 3 channels per point
+	var lineDistances = new Float32Array( numPoints * 1 ); // 1 value per point
+
+	geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+	geometry.addAttribute( 'color', new THREE.BufferAttribute( colors, 3 ) );
+	geometry.addAttribute( 'lineDistance', new THREE.BufferAttribute( lineDistances, 1 ) );
+
+	// populate
+	var color = new THREE.Color();
+
+	for ( var i = 0, index = 0, l = numPoints; i < l; i ++, index += 3 ) {
+
+		positions[ index ] = points[ i ].x;
+		positions[ index + 1 ] = points[ i ].y;
+		positions[ index + 2 ] = points[ i ].z;
+
+		color.setHSL( i / l, 1.0, 0.5 );
+
+		colors[ index ] = color.r;
+		colors[ index + 1 ] = color.g;
+		colors[ index + 2 ] = color.b;
+
+		if ( i > 0 ) {
+
+			lineDistances[ i ] = lineDistances[ i - 1 ] + points[ i - 1 ].distanceTo( points[ i ] );
+
+		}
+
+	}
+
+	lineLength = lineDistances[ numPoints - 1 ];
+
+	// material
+	var material = new THREE.LineDashedMaterial( {
+
+  	vertexColors: THREE.VertexColors,
+  	dashSize: 1, // to be updated in the render loop
+  	gapSize: 1e10 // a big number, so only one dash is rendered
+
+	} );
+
+	// line
+	line = new THREE.Line( geometry, material );
+	scene.add( line );
+
+}
+
+function animate() {
+
+	requestAnimationFrame( animate );
+
+	fraction = ( fraction + 0.001 ) % 1;
+
+	line.material.dashSize = fraction * lineLength;
+
+	renderer.render( scene, camera );
+
+}
+
+
+
+
+
+
+//SOLUTION : 2
+
+// three.js animataed line using BufferGeometry
+/*
+var renderer, scene, camera;
+
+var line;
+var MAX_POINTS = 500;
+var drawCount;
+
+init();
+animate();
+
+function init() {
+
+	// info
+	var info = document.createElement( 'div' );
+	info.style.position = 'absolute';
+	info.style.top = '30px';
+	info.style.width = '100%';
+	info.style.textAlign = 'center';
+	info.style.color = '#fff';
+	info.style.fontWeight = 'bold';
+	info.style.backgroundColor = 'transparent';
+	info.style.zIndex = '1';
+	info.style.fontFamily = 'Monospace';
+	info.innerHTML = "three.js animataed line using BufferGeometry";
+	document.body.appendChild( info );
+
+	// renderer
+	renderer = new THREE.WebGLRenderer();
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	// scene
+	scene = new THREE.Scene();
+
+	// camera
+	camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
+	camera.position.set( 0, 0, 1000 );
+
+	// geometry
+	var geometry = new THREE.BufferGeometry();
+
+	// attributes
+	var positions = new Float32Array( MAX_POINTS * 3 ); // 3 vertices per point
+	geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+
+	// drawcalls
+	drawCount = 2; // draw the first 2 points, only
+	geometry.setDrawRange( 0, drawCount );
+
+	// material
+	var material = new THREE.LineBasicMaterial( { color: 0xff0000, linewidth: 2 } );
+
+	// line
+	line = new THREE.Line( geometry,  material );
+	scene.add( line );
+
+	// update positions
+	updatePositions();
+
+}
+
+// update positions
+function updatePositions() {
+
+	var positions = line.geometry.attributes.position.array;
+
+	var x = y = z = index = 0;
+
+	for ( var i = 0, l = MAX_POINTS; i < l; i ++ ) {
+
+		positions[ index ++ ] = x;
+		positions[ index ++ ] = y;
+		positions[ index ++ ] = z;
+
+		x += ( Math.random() - 0.5 ) * 30;
+		y += ( Math.random() - 0.5 ) * 30;
+		z += ( Math.random() - 0.5 ) * 30;
+
+	}
+
+}
+
+// render
+function render() {
+
+	renderer.render( scene, camera );
+
+}
+
+// animate
+function animate() {
+
+	requestAnimationFrame( animate );
+
+	drawCount = ( drawCount + 1 ) % MAX_POINTS;
+
+	line.geometry.setDrawRange( 0, drawCount );
+
+	if ( drawCount === 0 ) {
+
+		// periodically, generate new data
+
+		updatePositions();
+
+		line.geometry.attributes.position.needsUpdate = true; // required after the first render
+
+		line.material.color.setHSL( Math.random(), 1, 0.5 );
+
+	}
+
+	render();
+
+}
+*/
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+
+
+path1  = [pre3, c1 - u7, co1, ce4, G1]
+            1,    2,      3,   0.5, 
+path2  = [pre3, c1 - u4, co9, ce9, ce2, G1]
+path3  = [c2 - u4, co11, ce8, ce9, ce2, G1]
+path4  = [pre5, c5 - u6, c7 - u6, ce2, G1]
+path5  = [pre5, c5 - u12, c7 - u12, ce2, G1]
+path6  = [pre5, c5 - u12, co9, c6 - u11, c7 - u12, ce9, ce2, G1]

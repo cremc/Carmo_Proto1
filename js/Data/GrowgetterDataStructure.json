@@ -1,0 +1,51 @@
+{
+    "DataStructureMetaData" : {
+        "Name": "Growgetter",
+        "DataStructureDomain": "UserProfile",
+        "DataStructureDescription": "This JSON data structure is for describing all the academic background and the three ATIONS (aspirations, limitations and obligations) of an aspiring Student."
+    },
+    "id": 1,
+    "ScreenName": "growgettUser1",
+    "PersonalContactDetails": {},
+    "ValueIn_CV": {
+        "Education": [
+            {"EducationLevel__ID": "Bachelor's degree", "AcademicDegree__ID": "Bachelor of Arts", "SubjectArea": "History", "StartDate": "03-Jan-2014", "EndDate": "27-Dec-2016", "DateAwarded": "14-Jan-2017", "CourseDuration": "3 years", "Institution": "Delhi University", "InstitutionCampus": "North Campus", "SchoolOrCollege__ID": "Shree Ram College","InstitutionDepartment": "Liberal Arts ", "Results": {"CGPA": 3.9, "MarksPercentage": "", "Merit": "Passed with honors", "Class": "", "Division": ""}}, 
+            {"EducationLevel__ID": "Master's degree", "AcademicDegree__ID": "Master of Arts", "SubjectArea": "History", "StartDate": "03-Jan-2014", "EndDate": "27-Dec-2016", "DateAwarded": "14-Jan-2017", "CourseDuration": "3 years", "Institution__ID": 313, "InstitutionCampus__ID": 77, "SchoolOrCollege__ID": 877,"InstitutionDepartment__ID": 79, "Results": {"CGPA": 3.9, "MarksPercentage": "", "Merit": "Passed with honors", "Class": "", "Division": ""}
+            }],
+        "BusinessSkills": [{}, {}, {}, {}],
+        "ProfessionalExperience": [{}, {}, {}],
+        "SoftSkills": [{}, {}, {}],
+        "Training": [{}, {}],
+        "Certifications": [{}, {}],
+        "TestScores": [
+            {"ExamName": "GMAT", 
+                "ExamVersion": "General", 
+                "DateTaken": "01-Apr-2019", 
+                "ValidityDate": "31-Mar-2021", 
+                "ExamLocation": "Kolkata, India",
+                "Result": [
+                    {"ScoreName": "ScoreName1", "ScoreResult": 8.5},
+                    {"ScoreName": "ScoreName2", "ScoreResult": 7.5}
+                ]},
+            {"ExamName": "IELTS", 
+                "ExamVersion": "Academic", 
+                "DateTaken": "12-Jun-2019", 
+                "ValidityDate": "11-Jun-2021", 
+                "ExamLocation": "Kolkata, India",
+                "Result": [
+                    {"ScoreName": "Listening", "ScoreResult": 8.5},
+                    {"ScoreName": "Reading", "ScoreResult": 7.5},
+                    {"ScoreName": "Writing", "ScoreResult": 7.5},
+                    {"ScoreName": "Speaking", "ScoreResult": 7.5},
+                    {"ScoreName": "Overall", "ScoreResult": 8.0}
+                ]
+            }
+        ],
+        "Publications": [{}, {}, {}],
+        "PatentsAndCopyrights": [{}, {}, {}]
+
+    },
+    "Constraints": {},
+    "Aspirations": {}
+    
+}

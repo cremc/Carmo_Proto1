@@ -1,0 +1,207 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    /* font-family: 'Verdana'; */
+}
+:root {
+    --hue-neutral: 120; /* Using HSL colors, the default Hue is value 200*/
+    --hue-unselected: 200;    /* deep-red color*/
+    --hue-selected: 145; /* green color */
+}
+body {
+    --hue: var(--hue-neutral);
+    padding: 0;
+    margin: 0;
+    /* display: flex; */
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.back-image-1 {
+    background-color: hsl(var(--hue), 100%, 20%);
+    background: url(/images/forest_path_1.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.back-image-2 {
+    background-color: hsl(var(--hue), 100%, 20%);
+    background: url(/images/forest_road_1.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.hero {
+    color: white;
+    /* margin-top: 10%; */
+    /* margin-bottom: 10%; */
+    text-align: center;
+    font-size: 42px;
+    letter-spacing: -0.05em;
+    line-height: 1.2em;
+    /* font-family: 'Revalia', cursive; */
+    font-family: 'Montserrat', sans-serif;
+  }
+
+
+  .subheading {
+    color: white;
+    /* background-color: orange; */
+    text-align: center;
+    /* font-size: 42px;
+    line-height: 1.2em; */
+    font-family: 'Montserrat', sans-serif;
+  }
+
+
+.container {
+   
+    /* max-width: 80%; */
+    
+    width: 60%;
+    max-height: 700px;
+    overflow-y:auto;
+    background-color: rgb(117, 131, 118);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+    /* position: absolute; */
+    margin: auto;
+    
+    /* left: auto;
+    right: auto; */
+    /* top: auto;
+    bottom: auto; */
+}
+
+.question-container {
+    
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    gap: 10px;
+    margin: 20px 50px;
+}
+
+.btn {
+    border-radius: 5px;
+    background-color: hsl(var(--hue), 30%, 50%);
+    padding: 5px 10px;
+    color: white;
+    /* align-items: flex-start; */
+    text-align: left;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto; 
+    /* repeat(4, auto); */
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.skill-level-grid {
+    display: grid;
+    grid-template-columns: auto 110px 110px 110px 110px 110px; 
+    /* gap: 10px; */
+    /* margin: 20px 0; */
+}
+
+.add-more {
+    width: 50px;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.question-element {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.answer-elements {
+    --hue: var(--hue-neutral);
+    border: 1px solid hsl(var(--hue), 100%, 30%);
+    background-color: hsl(var(--hue), 0%, 90%);
+    font-size: 1rem;
+    padding: 5px 10px;
+    color: black;
+    outline: none;
+    align-items: center;
+    /* display: inline-block; */
+}
+
+.btn:hover {
+    border-color: white;
+    background-color: hsl(var(--hue), 60%, 50%);
+    /* border-width: 2px; */
+}
+
+.answer-elements:hover {
+    border-color: black;
+    background-color: hsl(var(--hue), 100%, 30%);
+    color: white;
+    /* border-width: 2px; */
+}
+
+.column-header {
+    font-weight: bolder;
+    font-size: large;
+    color: hsl(var(--hue), 90%, 20%);
+    text-align: center;
+}
+
+.selected {
+    background-color: hsl(var(--hue), 100%, 30%);
+    color: white;
+}
+
+
+.start-btn {
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.next-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    /* position: absolute;
+    right: 10px;
+    bottom: 10px; */
+}
+
+.next-section {
+    width: 60%;
+    margin: auto;
+    margin-top: 10px;
+    text-align: right;
+
+}
+
+.navigation-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.warning-message {
+    position: absolute;
+    bottom: -10px;
+    /* margin-top: 20px; */
+    font-size: 1.0rem;
+    color: red;
+}
+
+.hide {
+    display: none;
+}

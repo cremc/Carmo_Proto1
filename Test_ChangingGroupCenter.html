@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://threejs.org/build/three.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+</html>
+
+<script>
+var three = THREE;
+
+var scene = new three.Scene();
+var camera = new three.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+var renderer = new three.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+document.body.appendChild(renderer.domElement);
+camera.position.z = 30;
+var cubeMatrix = new THREE.Object3D();
+
+var nextHeight = 0;
+for(var j = 0, x = 0, y = 0; j < 220; j++, x++) {
+var z = Math.floor(Math.random() * 12) + 1;
+    var geometry = new THREE.BoxGeometry(1,  1 , z);
+
+    var material = new THREE.MeshBasicMaterial({vertexColors: THREE.VertexColors});
+
+    var color = Math.random() * 0xFFFFFF;
+
+    for(var i = 0; i < geometry.faces.length; i += 2) {
+        geometry.faces[i].color.setHex(color);
+      geometry.faces[i + 1].color.setHex(color);
+    }
+    var cube = new THREE.Mesh(geometry, material);
+    cube.position.set(x,y,z/2);
+
+    if (x === 10) {
+        x = -1;
+      y++;
+    }
+
+    //cube.position.y = y * 1;
+    cubeMatrix.add(cube);
+}
+var bbox = new THREE.Box3().setFromObject(cubeMatrix);
+cubeMatrix.position.set(-(bbox.min.x + bbox.max.x) / 2, -(bbox.min.y + bbox.max.y) / 2, 0);
+
+var pivot = new THREE.Group();
+pivot.add(cubeMatrix);
+
+scene.add(pivot);
+// scene.add(cubeMatrix);
+scene.add(new THREE.AxisHelper());
+
+
+var isDragging = false;
+var previousMousePosition = {
+    x: 0,
+    y: 0
+};
+// $(renderer.domElement).on('mousedown', function(e) {
+//     isDragging = true;
+// })
+
+container.addEventListener('mousedown', function(e) {
+        isDragging = true;
+    });
+
+    container.addEventListener('mousemove', function(e) {
+    //console.log(e);
+    var deltaMove = {
+        x: e.offsetX-previousMousePosition.x,
+        y: e.offsetY-previousMousePosition.y
+    };
+
+    if(isDragging) {
+
+        var deltaRotationQuaternion = new three.Quaternion()
+            .setFromEuler(new three.Euler(
+                (Math.PI / 180) * (deltaMove.y * 1),
+                (Math.PI / 180) * (deltaMove.x * 1),
+                0,
+                'XYZ'
+            ));
+
+            pivot.quaternion.multiplyQuaternions(deltaRotationQuaternion, pivot.quaternion);
+    }
+
+    previousMousePosition = {
+        x: e.offsetX,
+        y: e.offsetY
+    };
+});
+/* */
+
+// $(document).on('mouseup', function(e) {
+//     isDragging = false;
+// });
+
+container.addEventListener('mouseup', function(e) {
+        isDragging = false;
+    });
+
+// shim layer with setTimeout fallback
+window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function(callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
+function render() {
+    renderer.render(scene, camera);
+    requestAnimFrame(render);
+}
+
+render();
+
+ /*   var three = THREE;
+
+    var scene = new three.Scene();
+    var camera = new three.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+    var renderer = new three.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    container = document.getElementById('container');
+    container.appendChild(renderer.domElement);
+    camera.position.z = 30;
+    var cubeMatrix = new THREE.Object3D();
+
+    var nextHeight = 0;
+    for(var j = 0, x = 0, y = 0; j < 220; j++, x++) {
+    var z = Math.floor(Math.random() * 12) + 1;
+        var geometry = new THREE.BoxGeometry(1,  1 , z);
+        
+        var material = new THREE.MeshBasicMaterial({vertexColors: THREE.VertexColors});
+        
+        var color = Math.random() * 0xFFFFFF;
+        
+        for(var i = 0; i < geometry.faces.length; i += 2) {
+        	geometry.faces[i].color.setHex(color);
+          geometry.faces[i + 1].color.setHex(color);
+        }
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.set(x,y,z/2);
+        
+        if (x === 10) {
+        	x = -1;
+          y++;
+        }
+        
+        //cube.position.y = y * 1;
+        cubeMatrix.add(cube);
+        
+    }
+    var bbox = new THREE.Box3().setFromObject(cubeMatrix);
+    cubeMatrix.position.set(-(bbox.min.x + bbox.max.x) / 2, -(bbox.min.y + bbox.max.y) / 2, 0);
+
+    var pivot = new THREE.Group();
+    pivot.add(cubeMatrix);
+
+    scene.add(pivot);
+    scene.add(new THREE.AxisHelper());
+
+
+    var isDragging = false;
+    var previousMousePosition = {
+        x: 0,
+        y: 0
+    };
+    container.addEventListener('mousedown', function(e) {
+        isDragging = true;
+    });
+    container.addEventListener('mousemove', function(e) {
+        //console.log(e);
+        var deltaMove = {
+            x: e.offsetX-previousMousePosition.x,
+            y: e.offsetY-previousMousePosition.y
+        };
+
+        if(isDragging) {
+                
+            var deltaRotationQuaternion = new three.Quaternion()
+                .setFromEuler(new three.Euler(
+                    (Math.PI / 180) * (deltaMove.y * 1),
+                    (Math.PI / 180) * (deltaMove.x * 1),
+                    0,
+                    'XYZ'
+            ));
+        
+            pivot.quaternion.multiplyQuaternions(deltaRotationQuaternion, pivot.quaternion);
+        }
+        
+        previousMousePosition = {
+            x: e.offsetX,
+            y: e.offsetY
+        };
+    });
+    
+
+    container.addEventListener('mouseup', function(e) {
+        isDragging = false;
+    });
+
+    window.onresize = function() {
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+    }
+
+    // shim layer with setTimeout fallback
+    window.requestAnimFrame = (function(){
+        return  window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function(callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
+    })();
+
+    function render() {
+        renderer.render(scene, camera);
+        requestAnimFrame(render);
+    }
+
+    render();
+*/
+</script>

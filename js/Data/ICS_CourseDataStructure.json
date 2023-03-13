@@ -1,0 +1,134 @@
+
+{
+    "DataStructureMetaData" : {
+        "Name": "InstitutionXCASXSubjectArea - ICS",
+        "DataStructureDomain": "Academic",
+        "DataStructureDescription": "This JSON data structure is for describing a Course and its associated tables."
+    },
+    "id": 1,
+    "InstitutionXCAS__ID": 2,
+    "CASLevel1ID__ID": 79,
+    "CASLevel2ID__ID": 9,
+    "CASLevel3ID__ID": 341,
+    "CASLevel4ID__ID": "",
+    "CourseUnitName": "abc",
+    "CourseUnitDescription": "description",
+    "CourseStartSession": "Date",
+    "CourseDurationDays": "",
+    "CourseDurationWeeks": "",
+    "CourseDurationMonths": 24,
+    "CourseCreditsRequired": 36,
+    "CertifierInstitution__ID": 23,
+    "CertificationAttained_ID": 22,
+    "AttendanceType": 1,
+    "PreRequisiteValueIn": {
+        "Education": {
+            "MinimumAcademicDegree__ID": 32,
+            "MinimumEducationLevel__ID": 3
+        },
+        "ProfessionalExperience": [
+            {
+                "OrganizationType": "Multinational Company",
+                "OrganizationEmployeeMinSize": 1000,
+                "OrganizationDepartment": "Marketing",
+                "NumberOfProjects": 2,
+                "ProjectTypes": ["Market research on consumer behaviour", "Sales turnover size min USD 1 MN"],
+                "NumberOfYears": 3
+            },
+            {
+                "OrganizationType": "National-level Company",
+                "OrganizationEmployeeMinSize": 1000,
+                "OrganizationDepartment": ["Marketing", "Sales", "Market Research"],
+                "MinNumberOfProjects": 2,
+                "ProjectTypes": ["Product commercialization in ECommerce", "Competitor analysis"],
+                "NumberOfYears": 3
+            }
+        ],
+        "BusinessSkills": [
+            {
+                "SkillName": "Software TeamLead",
+                "MinDuration": "3 years",
+                "SkillLevel": "Advanced"
+            },
+            {
+                "SkillName": "BusinessAnalyst-Finance",
+                "MinDuration": "2 years",
+                "SkillLevel": "Pro"
+            },
+            {
+                "SkillName": "Programming-Python",
+                "MinDuration": "5 years",
+                "SkillLevel": "Expert"
+            }
+        ],
+        "SoftSkills": {
+            "Programming" : {
+                "Python": "Basic",
+                "LinuxAdministration": "Basic",
+                "R": "Basic",
+                "ArtificialIntelligence": {}
+                
+            },
+            "Communication": {
+                "Presentation": "Basic",
+                "Technical Writing": "Desired",
+                "Oral Communication": "Basic"
+            },
+            "Langauge skills": {
+                "English oral communication": "Advanced",
+                "English written communication": "Pro"
+            }
+        },
+        "MarketValue": {}
+    },
+    "ValueAdd": {
+
+    },
+    "ValueOut": {
+        "Education": {
+            "FinalAcademicDegree__ID": 47,
+            "EducationLevel__ID": 4
+        },
+        "Experience": {
+
+        },
+        "SoftSkills": {
+            "Programming" : {
+                "Python": "Advanced",
+                "Linux Administration": "Advanced",
+                "R": "Advanced",
+                "Artificial Intelligence": {
+                    "Deep Learning concepts": "Advanced",
+                    "Machine Learning": "Advanced"
+                }
+            },
+            "Communication": {
+                "Presentation": "Developed",
+                "Technical Writing": "Advanced",
+                "Oral Communication": "Advanced"
+            }
+        },
+        "MarketValue": {
+            "BrandImageBoost": 10,
+            "NetworkValue": 7,
+            "NetworkValueScale": "On a scale of 0 to 10"
+        }
+
+    },
+    "RequisiteCourseUnits": {
+    },
+    "CourseRanking" : {
+    },
+    "Accreditation": {
+    },
+    "Expenses": {
+    },
+    "FinancialAid": {
+    },
+    "AdmissionProcess": {
+
+    }
+
+
+}
+

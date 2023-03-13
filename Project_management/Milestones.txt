@@ -1,0 +1,20 @@
+DONE:
+1.   Career Cube
+2.   Carmosphere - Career boards, Courses, Edu-Institutions, Certificates
+3.   Career Cube on Carmosphsere
+4.   Time map
+5.   Expense map (only reference map done)
+6.   Manual suggestion - Career cube to Courses
+
+
+
+
+
+TO BE DONE (in order of priority):
+*  Manual suggestion - Course to Institutions
+*  Mouse over: Description panel of an entity
+*  Search and filtering using the Smart Search box
+*  Add tuition and other cost of study and certifications
+*  Expense map with expense estimates for each run. (A run is a sprint for the next milestone in one's career plan)
+*  Manual suggestion - University course to industry and job type, or certification
+*  Show career paths of successful people

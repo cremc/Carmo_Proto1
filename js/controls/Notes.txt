@@ -1,0 +1,2 @@
+The file OrbitControls.js was latest version downloaded from 
+https://github.com/mrdoob/three.js/tree/dev/examples/js/controls
